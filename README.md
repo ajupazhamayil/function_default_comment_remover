@@ -1,15 +1,13 @@
-# PHP Function Signature Changer
+# PHP commented function param example value remover
 
-This repository helps to change the old PHP function signatures (version < 7.4.0) to new PHP function signatures with type declarations(version >= 7.4.0).
+This repository helps to remove the commented example function param values in the repository.
 
-More information on the type declaration is available here https://www.php.net/manual/en/language.types.declarations.php
+example PR output of this repo: https://github.com/GoogleCloudPlatform/php-docs-samples/pull/1715
 
 # How to use this script
 
-Run `python signature_argument_adder.py path_to_directory`
+Run `python function_param_example_comment_remover.py path_to_directory`
 where `path_to_directory` is the path to the php files' directory
-
-**Note: This script will NOT disturb the existing new PHP function signatures in the directory**
 
 # Requirements
 The `python3` script expects proper `@param` comments for all the variables in the function signature.
@@ -17,31 +15,37 @@ The `python3` script expects proper `@param` comments for all the variables in t
 eg:
 ```
  /*
- * @param string $instanceId The Spanner instance ID.
- * @param string $databaseId The Spanner database ID.
- * @param string $tableName The name of the table to create, defaults to Singers.
+ * @param string $projectId The ID of your Google Cloud Platform project.
+ * @param string $accessId Access ID for an inactive HMAC key.
  */
-function foo($instanceId, $databaseId, $tableName)
+function foo($projectId, $accessId)
+{
+    // $projectId = 'my-project-id';
+    // $accessId = 'GOOG0234230X00';
+
 ```
 
 # Input and Output example
 
 ```
 Input:
- /*
- * @param string $instanceId The Spanner instance ID.
- * @param string $databaseId The Spanner database ID.
- * @param string $tableName The name of the table to create, defaults to Singers.
+ * @param string $projectId The ID of your Google Cloud Platform project.
+ * @param string $accessId Access ID for an inactive HMAC key.
  */
-function foo($instanceId, $databaseId, $tableName)
+function foo($projectId, $accessId)
+{
+    // $projectId = 'my-project-id';
+    // $accessId = 'GOOG0234230X00';
+
+    $storage = new StorageClient();
 
 Output:
- /*
- * @param string $instanceId The Spanner instance ID.
- * @param string $databaseId The Spanner database ID.
- * @param string $tableName The name of the table to create, defaults to Singers.
+ * @param string $projectId The ID of your Google Cloud Platform project.
+ * @param string $accessId Access ID for an inactive HMAC key.
  */
-function foo(string $instanceId, string $databaseId, string $tableName = 'Singers'): void
+function foo($projectId, $accessId)
+{
+    $storage = new StorageClient();
 ```
 
 

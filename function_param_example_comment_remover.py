@@ -16,7 +16,6 @@ Output:
  */
 function foo($projectId, $accessId)
 {
-
     $storage = new StorageClient();
 '''
 
